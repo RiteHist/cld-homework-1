@@ -10,3 +10,44 @@ variable "cloud_id" {
 variable "folder_id" {
     type = string
 }
+
+variable "vpc_name" {
+    type = string
+    default = "cool_vpc"
+}
+
+variable "subnet_params" {
+    type = list(object({
+        name = string
+        cidr = list(string)
+    }))
+}
+
+variable "ssh_key_path" {
+    type = string
+    default = "~/.ssh/id_ed25519.pub"
+}
+
+variable "vm_metadata" {
+    type = map(string)
+}
+
+variable "vm_params" {
+    type = map(object({
+        name = string
+        image_family = optional(string)
+        image_id = optional(string)
+        cores = number
+        memory = number
+        core_fraction = number
+        preemptible = bool
+        platform_id = string
+        nat = bool
+        disk_volume = number
+        ip_address = optional(string)
+    }))
+}
+
+variable "vm_username" {
+    type = string
+}
